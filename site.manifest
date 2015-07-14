@@ -1,0 +1,9 @@
+CACHE MANIFEST
+
+# version 1
+./index.html
+http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css
+http://fonts.googleapis.com/css?family=Slabo+27px
+http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js
+http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js
+http://fonts.gstatic.com/s/slabo27px/v3/PuwvqkdbcqU-fCZ9Ed-b7fk_vArhqVIZ0nv9q090hN8.woff2
