@@ -64,21 +64,33 @@
     },1000);
     
     function getTimeDiff(start, stop){
-//      start = parseInt(start);
-//      stop = parseInt(stop);
       var diff = (stop-start);
-      
+      var hours = Math.floor( diff / (1000*60*60) );
+      var mins  = Math.floor( diff / (1000*60) );
       var secs  = Math.floor( diff / 1000 );
       
-      return secs;
-    }    
+      //Place Holder zeros and over 60 fix
+      secs = timeHolders(secs,mins);
+      mins = timeHolders(mins,hours);
+
+      return hours + ":" + mins + ":" + secs;
+    }
+    
+    function timeHolders(time1,time2){
+      if(time1 >= 60){
+        var div = time2 * 60;
+        time1 = time1 - div;
+      }
+      if(time1<10){time1 = "0"+time1};
+      return time1;
+    }
   </script>
 </head>
 <body> 
 
 <div class="container">
   <h2>Timer</h2>
-  <div id="display" class="well text-center">00:00:00</div>
+  <div id="display" class="well text-center">0:00:00</div>
   <a href="#" id="start" class="btn btn-info btn-lg btn-block" role="button">Start</a>
   <!--<a href="#" id="clear" class="btn btn-danger btn-lg btn-block" role="button">Clear Timer</a>-->
   <a href="#" id="stop" class="btn btn-danger btn-lg btn-block" role="button">Stop</a>
