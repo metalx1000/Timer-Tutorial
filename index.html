@@ -16,10 +16,9 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <script type="text/javascript">
-    var StartTime;
-    var EndTime;
-    var Time = 0;
-    var TimeInt;
+    var startTime;
+    var timerRunning;
+    var currentTime;
     
     $(document).ready(function(){
       $("#stop").hide();
@@ -35,27 +34,44 @@
       });
       
       $("#clear").click(function(){
-        Time = 0;
+        Time = "00:00:00";
         $("#display").html(Time);
       });
     });
     
     function startTimer(){
+      timerRunning = true;
       $("#start").hide();
       $("#clear").hide();
       $("#stop").show();
-      TimeInt = setInterval(function(){
-        $("#display").html(Time);
-        Time += 1;
-      },1000);
+      startTime = new Date().getTime();
+      
     }
     
     function stopTimer(){
+      timerRunning = false;
       $("#start").show();
       $("#clear").show();
       $("#stop").hide();      
-      clearInterval(TimeInt);
     }
+    
+    setInterval(function(){
+      if(timerRunning){
+        currentTime = new Date().getTime();
+        var time = getTimeDiff(startTime,currentTime);
+        $("#display").html(time);
+      }
+    },1000);
+    
+    function getTimeDiff(start, stop){
+//      start = parseInt(start);
+//      stop = parseInt(stop);
+      var diff = (stop-start);
+      
+      var secs  = Math.floor( diff / 1000 );
+      
+      return secs;
+    }    
   </script>
 </head>
 <body> 
@@ -64,7 +80,7 @@
   <h2>Timer</h2>
   <div id="display" class="well text-center">00:00:00</div>
   <a href="#" id="start" class="btn btn-info btn-lg btn-block" role="button">Start</a>
-  <a href="#" id="clear" class="btn btn-danger btn-lg btn-block" role="button">Clear Timer</a>
+  <!--<a href="#" id="clear" class="btn btn-danger btn-lg btn-block" role="button">Clear Timer</a>-->
   <a href="#" id="stop" class="btn btn-danger btn-lg btn-block" role="button">Stop</a>
 </div>
 
