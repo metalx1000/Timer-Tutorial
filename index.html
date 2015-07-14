@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Case</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link href='http://fonts.googleapis.com/css?family=Slabo+27px' rel='stylesheet' type='text/css'>
+  <style type="text/css">
+      body{
+          font-family: 'Slabo 27px', serif;
+          font-weight: 800;
+          font-size: 500%;
+      }
+  </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script type="text/javascript">
+    var StartTime;
+    var EndTime;
+    var Time = 0;
+    var TimeInt;
+    
+    $(document).ready(function(){
+      $("#stop").hide();
+      
+      //START TIMER
+      $("#start").click(function(){
+        startTimer();
+      });
+      
+      //STOP TIMER
+      $("#stop").click(function(){
+        stopTimer();
+      });
+      
+      $("#clear").click(function(){
+        Time = 0;
+        $("#display").html(Time);
+      });
+    });
+    
+    function startTimer(){
+      $("#start").hide();
+      $("#clear").hide();
+      $("#stop").show();
+      TimeInt = setInterval(function(){
+        $("#display").html(Time);
+        Time += 1;
+      },1000);
+    }
+    
+    function stopTimer(){
+      $("#start").show();
+      $("#clear").show();
+      $("#stop").hide();      
+      clearInterval(TimeInt);
+    }
+  </script>
+</head>
+<body> 
+
+<div class="container">
+  <h2>Timer</h2>
+  <div id="display" class="well text-center">00:00:00</div>
+  <a href="#" id="start" class="btn btn-info btn-lg btn-block" role="button">Start</a>
+  <a href="#" id="clear" class="btn btn-danger btn-lg btn-block" role="button">Clear Timer</a>
+  <a href="#" id="stop" class="btn btn-danger btn-lg btn-block" role="button">Stop</a>
+</div>
+
+</body>
+</html>
