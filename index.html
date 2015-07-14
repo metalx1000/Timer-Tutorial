@@ -16,10 +16,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <script type="text/javascript">
-    var startTime;
-    var timerRunning;
-    var currentTime;
-    
     $(document).ready(function(){
       $("#stop").hide();
       
@@ -36,27 +32,31 @@
     });
     
     function startTimer(){
-      timerRunning = true;
+      localStorage.timerRunning = true;
       $("#start").hide();
-      $("#clear").hide();
       $("#stop").show();
-      startTime = new Date().getTime();
+      localStorage.startTime = new Date().getTime();
       
     }
     
     function stopTimer(){
-      timerRunning = false;
+      localStorage.timerRunning = false;
       $("#start").show();
-      $("#clear").show();
       $("#stop").hide();      
     }
     
     setInterval(function(){
-      if(timerRunning){
-        currentTime = new Date().getTime();
+      if(localStorage.timerRunning == "true"){
+        $("#start").hide();
+        $("#stop").show();
+        var currentTime = new Date().getTime();
+        var startTime = localStorage.startTime;
         var time = getTimeDiff(startTime,currentTime);
-        $("#display").html(time);
+      }else{
+        $("#start").show();
+        $("#stop").hide();         
       }
+      $("#display").html(time);
     },1000);
     
     function getTimeDiff(start, stop){
